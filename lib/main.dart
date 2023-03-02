@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:sensores_app_v2/pages/AlertasPage.dart';
+import 'package:sensores_app_v2/pages/ConfigurarPage.dart';
+import 'package:sensores_app_v2/pages/CrearCuentaPage.dart';
 import 'package:sensores_app_v2/pages/LoguinPage.dart';
 import 'package:sensores_app_v2/pages/PiscinasPage.dart';
 import 'package:sensores_app_v2/pages/ReportesPage.dart';
 import 'package:sensores_app_v2/pages/SensoresPage.dart';
 import 'package:sensores_app_v2/pages/TestRoomPage.dart';
 import 'package:sensores_app_v2/pages/UsuariosPage.dart';
+import 'package:sensores_app_v2/providers/CamaronAddUserProvider.dart';
+import 'package:sensores_app_v2/providers/CamaronGetAlertasProvider.dart';
 import 'package:sensores_app_v2/providers/CamaronGetAllValoresProvider.dart';
 import 'package:sensores_app_v2/providers/CamaronGetBoxConfigProvider.dart';
 import 'package:sensores_app_v2/providers/CamaronGetReportesProvider.dart';
@@ -25,6 +30,8 @@ void main() {
         ChangeNotifierProvider(create: (_) => CamaronGetUsersProvider()),
         ChangeNotifierProvider(create: (_) => CamaronGetReportesProvider()),
         ChangeNotifierProvider(create: (_) => CamaronSetBoxConfigProvider()),
+        ChangeNotifierProvider(create: (_) => CamaronGetAlertasProvider()),
+        ChangeNotifierProvider(create: (_) => CamaronAddUserProvider()),
       ],
       child: const MyApp(),
     ),
@@ -48,6 +55,9 @@ class MyApp extends StatelessWidget {
         ReportesPage.routeName    : (context) => const ReportesPage(),
         TestRoomPage.routeName    : (context) => const TestRoomPage(),
         UsuariosPage.routeName    : (context) => const UsuariosPage(),
+        CrearCuentaPage.routeName : (context) => const CrearCuentaPage(),
+        AlertasPage.routeName     : (context) => const AlertasPage(),
+        ConfigurarPage.routeName     : (context) => const ConfigurarPage(),
 
         // ReporteConcreto.routeName : (context) => const ReporteConcreto(),
         // Censores.routeName        : (context) => const Censores(),

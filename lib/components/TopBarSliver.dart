@@ -5,10 +5,18 @@ import 'package:sensores_app_v2/providers/PageProvider.dart';
 import '../widgets/dialogs/NuevoFrecuenciaDialog.dart';
 
 class TopBarSliver extends StatelessWidget implements PreferredSizeWidget {
-  const TopBarSliver({super.key});
+  bool showActions;
+  TopBarSliver({
+    super.key,
+    this.showActions = true,
+  });
 
   @override
   Size get preferredSize => const Size.fromHeight(kToolbarHeight);
+  
+  // get showActions => this.showActions;
+  
+  // get showActions => showActions;
 
   @override
   Widget build(BuildContext context) {
@@ -17,13 +25,15 @@ class TopBarSliver extends StatelessWidget implements PreferredSizeWidget {
 
     return SliverPadding(
       padding: EdgeInsets.all(8.0),
-      sliver: SliverAppBar(
+      sliver: showActions
+      ?SliverAppBar(
 
         flexibleSpace: FlexibleSpaceBar(
           title: Text(pageProvider.title),
         ),
 
-        actions: [
+        actions: 
+        [
           // boton de recargar la pagina
           Padding(
             padding: EdgeInsets.only(right: 2.0),
@@ -57,6 +67,15 @@ class TopBarSliver extends StatelessWidget implements PreferredSizeWidget {
           borderRadius: BorderRadius.all(Radius.circular(20)),
         ),
       )
+      :SliverAppBar(
+        flexibleSpace: FlexibleSpaceBar(
+          title: Text(pageProvider.title),
+        ),
+        floating: true,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(20)),
+        ),
+      ),
     );
   }
   

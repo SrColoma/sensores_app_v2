@@ -86,44 +86,44 @@ class Configuracion {
         required this.maxTurbidez,
     });
 
-    int frecuencia;
-    int maxLluvia;
-    int minNivel;
-    int minTemp;
-    int minTurbidez;
-    int minLluvia;
-    int maxTemp;
-    int maxNivel;
-    int maxOxdix;
-    int minOxdix;
-    int maxSal;
-    int minTds;
+    double frecuencia;
+    double maxLluvia;
+    double minNivel;
+    double minTemp;
+    double minTurbidez;
+    double minLluvia;
+    double maxTemp;
+    double maxNivel;
+    double maxOxdix;
+    double minOxdix;
+    double maxSal;
+    double minTds;
     String piscina;
-    int maxPh;
-    int maxTds;
-    int minPh;
-    int minSal;
-    int maxTurbidez;
+    double maxPh;
+    double maxTds;
+    double minPh;
+    double minSal;
+    double maxTurbidez;
 
     factory Configuracion.fromJson(Map<String, dynamic> json) => Configuracion(
-        frecuencia: json["frecuencia"],
-        maxLluvia: json["max_LLUVIA"],
-        minNivel: json["min_NIVEL"],
-        minTemp: json["min_TEMP"],
-        minTurbidez: json["min_TURBIDEZ"],
-        minLluvia: json["min_LLUVIA"],
-        maxTemp: json["max_TEMP"],
-        maxNivel: json["max_NIVEL"],
-        maxOxdix: json["max_OXDIX"],
-        minOxdix: json["min_OXDIX"],
-        maxSal: json["max_SAL"],
-        minTds: json["min_TDS"],
+        frecuencia: json["frecuencia"]?.toDouble(),
+        maxLluvia: json["max_LLUVIA"]?.toDouble(),
+        minNivel: json["min_NIVEL"]?.toDouble(),
+        minTemp: json["min_TEMP"]?.toDouble(),
+        minTurbidez: json["min_TURBIDEZ"]?.toDouble(),
+        minLluvia: json["min_LLUVIA"]?.toDouble(),
+        maxTemp: json["max_TEMP"]?.toDouble(),
+        maxNivel: json["max_NIVEL"]?.toDouble(),
+        maxOxdix: json["max_OXDIX"]?.toDouble(),
+        minOxdix: json["min_OXDIX"]?.toDouble(),
+        maxSal: json["max_SAL"]?.toDouble(),
+        minTds: json["min_TDS"]?.toDouble(),
         piscina: json["piscina"],
-        maxPh: json["max_PH"],
-        maxTds: json["max_TDS"],
-        minPh: json["min_PH"],
-        minSal: json["min_SAL"],
-        maxTurbidez: json["max_TURBIDEZ"],
+        maxPh: json["max_PH"]?.toDouble(),
+        maxTds: json["max_TDS"]?.toDouble(),
+        minPh: json["min_PH"]?.toDouble(),
+        minSal: json["min_SAL"]?.toDouble(),
+        maxTurbidez: json["max_TURBIDEZ"]?.toDouble(),
     );
 
     Map<String, dynamic> toJson() => {

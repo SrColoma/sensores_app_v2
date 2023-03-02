@@ -41,7 +41,9 @@ class PiscinasPage extends StatelessWidget {
         child: CustomScrollView(
           slivers: [
 
-            const TopBarSliver(),
+            TopBarSliver(
+              showActions: sessionProvider.canUsed,
+            ),
 
 
             SliverToBoxAdapter(

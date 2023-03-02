@@ -19,6 +19,7 @@ class SessionProvider with ChangeNotifier {
   String _rol = 'user';
   String _piscina = 'Default';
   String _mensaje = '';
+  bool canUsed = false;
 
   String get user => _user;
   String get rol => _rol;
@@ -35,6 +36,7 @@ class SessionProvider with ChangeNotifier {
 
   set rol(String rol) {
     _rol = rol;
+    canUsed = _rol == 'admin' ? true : false;
     notifyListeners();
   }
 

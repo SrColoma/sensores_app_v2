@@ -12,24 +12,24 @@ class CamaronSetBoxConfigProvider with ChangeNotifier{
 
   final url = Uri.https('kmf7eub7se.execute-api.us-west-1.amazonaws.com','/camaronSetBoxConfig');
   Configuracion configuracion = Configuracion(
-        frecuencia:0,
-        maxLluvia:0,
-        minNivel:0,
-        minTemp:0,
-        minTurbidez:0,
-        minLluvia:0,
-        maxTemp:0,
-        maxNivel:0,
-        maxOxdix:0,
-        minOxdix:0,
-        maxSal:0,
-        minTds:0,
+        frecuencia:0.0,
+        maxLluvia:0.0,
+        minNivel:0.0,
+        minTemp:0.0,
+        minTurbidez:0.0,
+        minLluvia:0.0,
+        maxTemp:0.0,
+        maxNivel:0.0,
+        maxOxdix:0.0,
+        minOxdix:0.0,
+        maxSal:0.0,
+        minTds:0.0,
         piscina:"piscina1",
-        maxPh:0,
-        maxTds:0,
-        minPh:0,
-        minSal:0,
-        maxTurbidez:0,
+        maxPh:0.0,
+        maxTds:0.0,
+        minPh:0.0,
+        minSal:0.0,
+        maxTurbidez:0.0,
   );
 
   set setConfiguracion(Configuracion configuracion){
@@ -49,6 +49,7 @@ class CamaronSetBoxConfigProvider with ChangeNotifier{
       },
       body: jsonEncode(configuracion.toJson()),
     );
+    notifyListeners();
   }
 }
 

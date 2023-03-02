@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:sensores_app_v2/pages/AlertasPage.dart';
+import 'package:sensores_app_v2/pages/ConfigurarPage.dart';
 import 'package:sensores_app_v2/pages/LoguinPage.dart';
 import 'package:sensores_app_v2/pages/PiscinasPage.dart';
 import 'package:sensores_app_v2/pages/ReportesPage.dart';
@@ -54,8 +56,16 @@ class MenuDrawer extends StatelessWidget {
             getTile('S E N S O R E S', Icons.settings_remote_rounded, SensoresPage.routeName, context),
             getTile('P I S C I N A S', Icons.pool, PiscinasPage.routeName, context),
             getTile('R E P O R T E S', Icons.pie_chart, ReportesPage.routeName, context),
-            getTile('U S U A R I O S', Icons.people, UsuariosPage.routeName, context),
+            getTile('A L E R T A S', Icons.error, AlertasPage.routeName, context),
 
+
+            sessionProvider.canUsed 
+            ? getTile('C O N F I G U R A R', Icons.settings, ConfigurarPage.routeName, context) 
+            : const SizedBox(),
+
+            sessionProvider.canUsed
+            ?getTile('U S U A R I O S', Icons.people, UsuariosPage.routeName, context)
+            : const SizedBox(),
             
 
             ListTile(

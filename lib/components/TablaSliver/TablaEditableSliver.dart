@@ -1,14 +1,15 @@
+// TablaEditableSliver
 import 'package:flutter/material.dart';
+import 'package:sensores_app_v2/components/TablaSliver/CustomEditableDataTable.dart';
 
-import 'CustomDataTable.dart';
 
-class TablaSliver extends StatelessWidget {
+class TablaEditableSliver extends StatelessWidget {
   final String titulo;
   final String descripcion;
   final List<String> columns;
   final List<List<String>> rows;
 
-  TablaSliver({
+  TablaEditableSliver({
     super.key, 
     required this.titulo, 
     required this.descripcion, 
@@ -24,7 +25,7 @@ class TablaSliver extends StatelessWidget {
           const SizedBox(height: 20,),
           Text(titulo,style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
           Text(descripcion),
-          CustomDataTable(
+          CustomEditableDataTable(
             columns: columns,
             rows: rows,
           )

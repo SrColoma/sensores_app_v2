@@ -54,11 +54,14 @@ class SensoresPage extends StatelessWidget {
 
             // boton dentro de un sliver que redirige a la pagina de testroom
             SliverToBoxAdapter(
-              child: ElevatedButton(
-                child: Text("Test Room"),
-                onPressed: () {
-                  Navigator.of(context).pushReplacementNamed(TestRoomPage.routeName);
-                },
+              child: Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: ElevatedButton(
+                  child: Text("Test Room"),
+                  onPressed: () {
+                    Navigator.of(context).pushReplacementNamed(TestRoomPage.routeName);
+                  },
+                ),
               ),
             ),
 

@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sensores_app_v2/components/TopBarSliver.dart';
+import 'package:sensores_app_v2/pages/CrearCuentaPage.dart';
 import 'package:sensores_app_v2/pages/PiscinasPage.dart';
 import 'package:sensores_app_v2/pages/SensoresPage.dart';
 import 'package:sensores_app_v2/providers/CamaronGetUsersProvider.dart';
@@ -24,6 +25,7 @@ class LoguinPage extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              Expanded(child: Container(),),
               Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(40),
@@ -73,24 +75,35 @@ class LoguinPage extends StatelessWidget {
               ),
               
               CupertinoButton(
-                  child: const Text('Iniciar Sesión'),
-                  onPressed: () => {
-                    camaronGetUsersProvider.camaronGetUsers.body.items.forEach((e) {
-                      if (sessionProvider.userController.text.trim() == e.user 
-                        && sessionProvider.passwordController.text.trim() == e.password)
-                      {
-                        sessionProvider.user = e.user;
-                        sessionProvider.piscina = "";
-                        sessionProvider.rol = e.rol;
-                        Navigator.pushReplacementNamed(context, PiscinasPage.routeName);
-                        return;
-                      }
-                      else{
-                        sessionProvider.mensaje = 'Usuario o contraseña incorrectos';
-                      }
-                    })
-                  },
-                ),
+                child: const Text('Iniciar Sesión'),
+                onPressed: () => {
+                  camaronGetUsersProvider.camaronGetUsers.body.items.forEach((e) {
+                    if (sessionProvider.userController.text.trim() == e.user 
+                      && sessionProvider.passwordController.text.trim() == e.password)
+                    {
+                      sessionProvider.user = e.user;
+                      sessionProvider.piscina = "";
+                      sessionProvider.rol = e.rol;
+                      Navigator.pushReplacementNamed(context, PiscinasPage.routeName);
+                      return;
+                    }
+                    else{
+                      sessionProvider.mensaje = 'Usuario o contraseña incorrectos';
+                    }
+                  })
+                },
+              ),
+
+              Expanded(child: Container(),),
+
+              CupertinoButton(
+                child: Text('crear Cuenta', style: TextStyle(color: Colors.blueGrey),),
+                onPressed: () => {
+                  Navigator.pushNamed(context, CrearCuentaPage.routeName)
+                },
+              )
+
+
             ],
           ),
         ),

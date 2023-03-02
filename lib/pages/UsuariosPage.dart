@@ -4,28 +4,33 @@ import 'package:sensores_app_v2/components/MenuDrawer.dart';
 import 'package:sensores_app_v2/components/TablaSliver/TablaSliver.dart';
 import 'package:sensores_app_v2/components/TopBarSliver.dart';
 import 'package:sensores_app_v2/providers/CamaronGetUsersProvider.dart';
-import 'package:sensores_app_v2/widgets/dialogs/NuevoFrecuenciaDialog.dart';
+import 'package:sensores_app_v2/widgets/dialogs/NuevoUserDialog.dart';
 
 import '../providers/PageProvider.dart';
 
-class UsuariosPage extends StatelessWidget {
+class UsuariosPage extends StatefulWidget {
   static const routeName = 'UsuariosPage';
   static const title = 'U S U A R I O S';
   static const buttonString = "Agregar Usuario";
-  static NuevoFrecuenciaDialog funcionNuevaFrecuencia = NuevoFrecuenciaDialog();
+  static NuevoUserDialog funcionNuevaFrecuencia = NuevoUserDialog();
 
   const UsuariosPage({super.key});
 
+  @override
+  State<UsuariosPage> createState() => _UsuariosPageState();
+}
+
+class _UsuariosPageState extends State<UsuariosPage> {
   @override
   Widget build(BuildContext context) {
 
     final pageProvider = Provider.of<PageProvider>(context);
     final camaronGetUsersProvider = Provider.of<CamaronGetUsersProvider>(context);
 
-    pageProvider.routeName = routeName;
-    pageProvider.title = title;
-    pageProvider.buttonString = buttonString;
-    pageProvider.dialogoSeleccionado = funcionNuevaFrecuencia;
+    pageProvider.routeName = UsuariosPage.routeName;
+    pageProvider.title = UsuariosPage.title;
+    pageProvider.buttonString = UsuariosPage.buttonString;
+    pageProvider.dialogoSeleccionado = UsuariosPage.funcionNuevaFrecuencia;
 
     return Scaffold(
       drawer: MenuDrawer(),
