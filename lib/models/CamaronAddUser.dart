@@ -33,18 +33,21 @@ class Body {
         required this.id,
         required this.user,
         required this.password,
+        required this.email,
         required this.rol,
     });
 
     String id;
     String user;
     String password;
+    String email;
     String rol;
 
     factory Body.fromJson(Map<String, dynamic> json) => Body(
         id: json["id"],
         user: json["user"],
         password: json["password"],
+        email: json["email"],
         rol: json["rol"],
     );
 
@@ -52,6 +55,7 @@ class Body {
         "id": id,
         "user": user,
         "password": password,
+        "email": email,
         "rol": rol,
     };
 }

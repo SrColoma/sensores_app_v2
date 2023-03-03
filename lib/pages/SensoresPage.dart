@@ -6,6 +6,7 @@ import 'package:sensores_app_v2/components/TopBarSliver.dart';
 import 'package:sensores_app_v2/components/gridSensores/Sensor.dart';
 import 'package:sensores_app_v2/components/gridSensores/SensoresGrid.dart';
 import 'package:sensores_app_v2/providers/CamaronGetAllValoresProvider.dart';
+import 'package:sensores_app_v2/providers/CamaronGetPiscinasProvider.dart';
 import 'package:sensores_app_v2/providers/SessionProvider.dart';
 import 'package:sensores_app_v2/widgets/dialogs/NuevoFrecuenciaDialog.dart';
 
@@ -25,6 +26,7 @@ class SensoresPage extends StatelessWidget {
   Widget build(BuildContext context) {
 
     final  camaronGetAllValoresProvider = Provider.of<CamaronGetAllValoresProvider>(context);
+    final camaronGetPiscinasProvider = Provider.of<CamaronGetPiscinasProvider>(context);
 
     final pageProvider = Provider.of<PageProvider>(context);
     final sessionProvider = Provider.of<SessionProvider>(context);
@@ -67,7 +69,7 @@ class SensoresPage extends StatelessWidget {
 
             // si no ha seleccionado una piscina muestra un mensaje y no muestra los graficos
             // si ha seleccionado una piscina muestra los graficos
-            if (sessionProvider.piscinas.contains(sessionProvider.piscina))
+            if (camaronGetPiscinasProvider.piscinas.contains(sessionProvider.piscina))
             // TODO : aqui esta el grafico que se debe repetir
               SliverPadding(
               padding: const EdgeInsets.all(16.0),

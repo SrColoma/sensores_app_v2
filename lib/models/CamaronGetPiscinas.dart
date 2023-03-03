@@ -1,15 +1,15 @@
 // To parse this JSON data, do
 //
-//     final camaronGetUsers = camaronGetUsersFromJson(jsonString);
+//     final camaronGetPiscinas = camaronGetPiscinasFromJson(jsonString);
 
 import 'dart:convert';
 
-CamaronGetUsers camaronGetUsersFromJson(String str) => CamaronGetUsers.fromJson(json.decode(str));
+CamaronGetPiscinas camaronGetPiscinasFromJson(String str) => CamaronGetPiscinas.fromJson(json.decode(str));
 
-String camaronGetUsersToJson(CamaronGetUsers data) => json.encode(data.toJson());
+String camaronGetPiscinasToJson(CamaronGetPiscinas data) => json.encode(data.toJson());
 
-class CamaronGetUsers {
-    CamaronGetUsers({
+class CamaronGetPiscinas {
+    CamaronGetPiscinas({
         required this.status,
         required this.body,
     });
@@ -17,7 +17,7 @@ class CamaronGetUsers {
     int status;
     Body body;
 
-    factory CamaronGetUsers.fromJson(Map<String, dynamic> json) => CamaronGetUsers(
+    factory CamaronGetPiscinas.fromJson(Map<String, dynamic> json) => CamaronGetPiscinas(
         status: json["status"],
         body: Body.fromJson(json["body"]),
     );
@@ -54,32 +54,28 @@ class Body {
 
 class Item {
     Item({
-        required this.user,
-        required this.password,
+        required this.nombre,
         required this.id,
-        required this.email,
-        required this.rol,
+        required this.fecha,
+        required this.capacidad,
     });
 
-    String user;
-    String password;
+    String nombre;
     String id;
-    String email;
-    String rol;
+    DateTime fecha;
+    String capacidad;
 
     factory Item.fromJson(Map<String, dynamic> json) => Item(
-        user: json["user"],
-        password: json["password"],
+        nombre: json["nombre"],
         id: json["id"],
-        email: json["email"],
-        rol: json["rol"],
+        fecha: DateTime.parse(json["fecha"]),
+        capacidad: json["capacidad"],
     );
 
     Map<String, dynamic> toJson() => {
-        "user": user,
-        "password": password,
+        "nombre": nombre,
         "id": id,
-        "email": email,
-        "rol": rol,
+        "fecha": fecha.toIso8601String(),
+        "capacidad": capacidad,
     };
 }

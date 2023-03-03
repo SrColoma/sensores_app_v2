@@ -8,7 +8,8 @@ class CamaronAddUserProvider with ChangeNotifier{
   final url = Uri.https('kmf7eub7se.execute-api.us-west-1.amazonaws.com','/camaronAddUser');
   String user = "";
   String password = "";
-  String rol = "";
+  String email = "";
+  String rol = "user";
 
   set setUser(String user){
     this.user = user;
@@ -17,6 +18,11 @@ class CamaronAddUserProvider with ChangeNotifier{
 
   set setPassword(String password){
     this.password = password;
+    notifyListeners();
+  }
+
+  set setEmail(String email){
+    this.email = email;
     notifyListeners();
   }
 
@@ -34,6 +40,7 @@ class CamaronAddUserProvider with ChangeNotifier{
       body: jsonEncode({
         "user": user,
         "password": password,
+        "email": email,
         "rol": rol,
       }),
     );

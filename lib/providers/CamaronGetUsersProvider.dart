@@ -4,7 +4,7 @@ import 'package:http/http.dart' as http;
 import 'package:sensores_app_v2/models/CamaronGetUsers.dart';
 
 class CamaronGetUsersProvider with ChangeNotifier {
-  List<String> columns = ["id","user","password","rol"];
+  List<String> columns = ["id","email","user","password","rol"];
   List<List<String>> rows = [];
   CamaronGetUsers camaronGetUsers = CamaronGetUsers(
     status: 0,
@@ -31,6 +31,7 @@ class CamaronGetUsersProvider with ChangeNotifier {
       for (var i = 0; i < camaronGetUsers.body.items.length; i++) {
         rows.add([
           camaronGetUsers.body.items[i].id,
+          camaronGetUsers.body.items[i].email,
           camaronGetUsers.body.items[i].user,
           camaronGetUsers.body.items[i].password,
           camaronGetUsers.body.items[i].rol,

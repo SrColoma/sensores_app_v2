@@ -35,17 +35,17 @@ class TopBarSliver extends StatelessWidget implements PreferredSizeWidget {
         actions: 
         [
           // boton de recargar la pagina
-          Padding(
-            padding: EdgeInsets.only(right: 2.0),
-            child : IconButton(
-              onPressed:() => {
-                // recaragar el contenido de los providers
-                // Navigator.pushReplacementNamed(context, pageProvider.routeName);
-              },
-              icon: Icon(Icons.refresh),
-            ),
+          // Padding(
+          //   padding: EdgeInsets.only(right: 2.0),
+          //   child : IconButton(
+          //     onPressed:() => {
+          //       // recaragar el contenido de los providers
+          //       // Navigator.pushReplacementNamed(context, pageProvider.routeName);
+          //     },
+          //     icon: Icon(Icons.refresh),
+          //   ),
             
-          ),
+          // ),
 
           Padding(
             padding: EdgeInsets.only(right: 10.0),

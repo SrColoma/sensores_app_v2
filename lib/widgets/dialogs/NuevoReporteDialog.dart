@@ -1,5 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:sensores_app_v2/providers/CamaronGetPiscinasProvider.dart';
+import 'package:sensores_app_v2/providers/SessionProvider.dart';
 
 class NuevoReporteDialog extends StatefulWidget {
   const NuevoReporteDialog({super.key});
@@ -11,11 +14,18 @@ class NuevoReporteDialog extends StatefulWidget {
 class _NuevoReporteDialogState extends State<NuevoReporteDialog> {
   DateTime _dateInicio = DateTime.now();
   DateTime _dateFin = DateTime.now();
-  var _piscinaList = ['Piscina 1', 'Piscina 2', 'Piscina 3'];
-  var _selectedPiscina = 'Piscina 1';
+  // var _piscinaList = ['Piscina 1', 'Piscina 2', 'Piscina 3'];
+  // var _selectedPiscina = 'Piscina 1';
   
   @override
   Widget build(BuildContext context) {
+
+    final camaronGetPiscinasProvider = Provider.of<CamaronGetPiscinasProvider>(context);
+    final sessionProvider = Provider.of<SessionProvider>(context);
+
+    var _piscinaList = camaronGetPiscinasProvider.piscinas;
+    var _selectedPiscina = sessionProvider.piscina;
+
     return CupertinoAlertDialog(
       title: Text('Nuevo Reporte'),
       insetAnimationCurve: Curves.easeInOut,

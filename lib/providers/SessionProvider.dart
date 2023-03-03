@@ -7,7 +7,7 @@ class SessionProvider with ChangeNotifier {
   TextEditingController userController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
-  List<String> _piscinas = ['Piscina1', 'Piscina2', 'Piscina3', 'Piscina4', 'Piscina5', 'Piscina6'];
+  // List<String> _piscinas = ['Piscina1', 'Piscina2', 'Piscina3', 'Piscina4', 'Piscina5', 'Piscina6'];
   // List<Sensor> _sensores = [
   //   Sensor(imagen: 'assets/images/turbidez.jpg', titulo: 'temperatura', media: '1',puntos: []),
   //   Sensor(imagen: 'assets/images/temperatura.jpg', titulo: 'temperatura', media: '1',puntos: []),
@@ -27,7 +27,7 @@ class SessionProvider with ChangeNotifier {
   String get mensaje => _mensaje;
 
   // List<Sensor> get sensores => _sensores;
-  List<String> get piscinas => _piscinas;
+  // List<String> get piscinas => _piscinas;
 
   set user(String user) {
     _user = user;

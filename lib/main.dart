@@ -9,10 +9,12 @@ import 'package:sensores_app_v2/pages/ReportesPage.dart';
 import 'package:sensores_app_v2/pages/SensoresPage.dart';
 import 'package:sensores_app_v2/pages/TestRoomPage.dart';
 import 'package:sensores_app_v2/pages/UsuariosPage.dart';
+import 'package:sensores_app_v2/providers/CamaronAddPiscinaProvider.dart';
 import 'package:sensores_app_v2/providers/CamaronAddUserProvider.dart';
 import 'package:sensores_app_v2/providers/CamaronGetAlertasProvider.dart';
 import 'package:sensores_app_v2/providers/CamaronGetAllValoresProvider.dart';
 import 'package:sensores_app_v2/providers/CamaronGetBoxConfigProvider.dart';
+import 'package:sensores_app_v2/providers/CamaronGetPiscinasProvider.dart';
 import 'package:sensores_app_v2/providers/CamaronGetReportesProvider.dart';
 import 'package:sensores_app_v2/providers/CamaronGetUsersProvider.dart';
 import 'package:sensores_app_v2/providers/CamaronSetBoxConfigProvider.dart';
@@ -32,6 +34,8 @@ void main() {
         ChangeNotifierProvider(create: (_) => CamaronSetBoxConfigProvider()),
         ChangeNotifierProvider(create: (_) => CamaronGetAlertasProvider()),
         ChangeNotifierProvider(create: (_) => CamaronAddUserProvider()),
+        ChangeNotifierProvider(create: (_) => CamaronGetPiscinasProvider()),
+        ChangeNotifierProvider(create: (_) => CamaronAddPiscinaProvider()),
       ],
       child: const MyApp(),
     ),

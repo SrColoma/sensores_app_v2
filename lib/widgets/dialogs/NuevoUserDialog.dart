@@ -13,6 +13,7 @@ class NuevoUserDialog extends StatefulWidget {
 }
 
 class _NuevoUserDialogState extends State<NuevoUserDialog> {
+  var _email = "";
   var _usuario = "";
   var _contrasenia = "";
   var _rol = "admin";
@@ -27,6 +28,17 @@ class _NuevoUserDialogState extends State<NuevoUserDialog> {
       title: const Text('Nuevo Usuario\n'),
       content: Column(
         children: [
+          CupertinoTextField(
+
+            // style: TextStyle(color: Colors.white),
+            placeholder: 'Email',
+            onChanged: (value) => {
+              setState(() {
+                _email = value;
+              }),
+            }
+          ),
+
           CupertinoTextField(
 
             // style: TextStyle(color: Colors.white),
@@ -116,6 +128,7 @@ class _NuevoUserDialogState extends State<NuevoUserDialog> {
                     onPressed: () {
                       Navigator.of(context).pop();
                       camaronAddUserProvider.user = _usuario;
+                      camaronAddUserProvider.email = _email;
                       camaronAddUserProvider.password = _contrasenia;
                       camaronAddUserProvider.rol = _rol;
                       camaronAddUserProvider.enviarPeticionAddUser();

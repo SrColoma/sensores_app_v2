@@ -7,6 +7,7 @@ import 'package:sensores_app_v2/components/gridPiscinas/PiscinasGrid.dart';
 import 'package:sensores_app_v2/providers/SessionProvider.dart';
 import 'package:sensores_app_v2/widgets/dialogs/NuevaPiscinaDialog.dart';
 
+import '../providers/CamaronGetPiscinasProvider.dart';
 import '../providers/PageProvider.dart';
 
 class PiscinasPage extends StatelessWidget {
@@ -23,6 +24,7 @@ class PiscinasPage extends StatelessWidget {
 
     final pageProvider = Provider.of<PageProvider>(context);
     final sessionProvider = Provider.of<SessionProvider>(context);
+    final camaronGetPiscinasProvider = Provider.of<CamaronGetPiscinasProvider>(context);
 
 
     pageProvider.routeName = routeName;
@@ -67,7 +69,8 @@ class PiscinasPage extends StatelessWidget {
                 ),
                 delegate: SliverChildBuilderDelegate(
                   (context, index) => PiscinasGrid(index: index),
-                  childCount: sessionProvider.piscinas.length,
+                  // childCount: sessionProvider.piscinas.length,
+                  childCount: camaronGetPiscinasProvider.piscinas.length,
                 ),
               ),
             ),

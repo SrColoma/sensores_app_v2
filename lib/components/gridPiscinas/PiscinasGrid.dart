@@ -3,6 +3,8 @@ import 'package:provider/provider.dart';
 import 'package:sensores_app_v2/widgets/formas/StatusDot.dart';
 import 'package:sensores_app_v2/providers/SessionProvider.dart';
 
+import '../../providers/CamaronGetPiscinasProvider.dart';
+
 class PiscinasGrid extends StatelessWidget {
   final int index;
 
@@ -15,9 +17,10 @@ class PiscinasGrid extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final sessionProvider = Provider.of<SessionProvider>(context);
+    final camaronGetPiscinasProvider = Provider.of<CamaronGetPiscinasProvider>(context);
     return InkWell(
       borderRadius: BorderRadius.circular(20),
-      onTap: () => sessionProvider.piscina = sessionProvider.piscinas[index],
+      onTap: () => sessionProvider.piscina = camaronGetPiscinasProvider.piscinas[index],
       child: Card(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(20),
@@ -27,10 +30,12 @@ class PiscinasGrid extends StatelessWidget {
           child: Stack(
             children: [
               Center(
-                child: Text(sessionProvider.piscinas[index])
+                child: Text(camaronGetPiscinasProvider.piscinas[index])
               ),
               StatusDot( 
-                sessionProvider.piscina == sessionProvider.piscinas[index] ? Colors.green : Colors.white,
+                sessionProvider.piscina == camaronGetPiscinasProvider.piscinas[index] 
+                ? Colors.green 
+                : Colors.white,
               ),
             ],
           ),

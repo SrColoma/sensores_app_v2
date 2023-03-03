@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:sensores_app_v2/providers/CamaronAddUserProvider.dart';
 
 import '../components/TopBarSliver.dart';
 import '../providers/PageProvider.dart';
@@ -14,6 +15,7 @@ class CrearCuentaPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final pageProvider = Provider.of<PageProvider>(context);
+    final camaronAddUserProvider = Provider.of<CamaronAddUserProvider>(context);
 
     pageProvider.routeName = routeName;
     pageProvider.title = title;
@@ -39,7 +41,7 @@ class CrearCuentaPage extends StatelessWidget {
                       children: [
 
                         CupertinoButton(
-                          child: Text('Tipo de usuario'),
+                          child: Text(camaronAddUserProvider.rol),
                           onPressed: () {
                             showCupertinoModalPopup(
                               context: context,
@@ -48,12 +50,18 @@ class CrearCuentaPage extends StatelessWidget {
 
                                   CupertinoActionSheetAction(
                                     child: Text('Administrador'),
-                                    onPressed: () {},
+                                    onPressed: () {
+                                      camaronAddUserProvider.setRol = "admin";
+                                      Navigator.pop(context);
+                                    },
                                   ),
                                   
                                   CupertinoActionSheetAction(
                                     child: Text('Usuario'),
-                                    onPressed: () {},
+                                    onPressed: () {
+                                      camaronAddUserProvider.setRol = "user";
+                                      Navigator.pop(context);
+                                    },
                                   ),
                                 ],
                                 cancelButton: CupertinoActionSheetAction(
@@ -67,16 +75,24 @@ class CrearCuentaPage extends StatelessWidget {
                           },
                         ),
 
+                        SizedBox(height: 10),
+
 
                         CupertinoTextField(
-                          placeholder: 'Codigo de acceso',
+                          placeholder: 'Correo electrónico',
+                          onChanged: (value) => {
+                            camaronAddUserProvider.setEmail = value,
+                          }
                         ),
 
                         SizedBox(height: 10),
 
 
                         CupertinoTextField(
-                          placeholder: 'Usuario',
+                          placeholder: 'Nombre de usuario',
+                          onChanged: (value) => {
+                            camaronAddUserProvider.setUser = value,
+                          }
                         ),
 
                         SizedBox(height: 10),
@@ -84,32 +100,50 @@ class CrearCuentaPage extends StatelessWidget {
 
                         CupertinoTextField(
                           placeholder: 'Contraseña',
+                          onChanged: (value) => {
+                            camaronAddUserProvider.setPassword = value,
+                          }
                         ),
 
                         SizedBox(height: 10),
-                        // DropdownButton(
-                        //   items: [
-                        //     DropdownMenuItem(
-                        //       child: Text('Administrador'),
-                        //       value: 'admin',
-                        //     ),
-                        //     DropdownMenuItem(
-                        //       child: Text('Usuario'),
-                        //       value: 'user',
-                        //     ),
-                        //   ],
-                        //   onChanged: (value) {},
-                        //   hint: Text('Tipo de usuario'),
+
+
+                        // CupertinoTextField(
+                        //   placeholder: 'Repetir contraseña',
                         // ),
-                        // dropdown button estilo cupertino
-                        CupertinoTextField(
-                          placeholder: 'Repetir contraseña',
-                        ),
 
                         Padding(
                           padding: const EdgeInsets.symmetric(vertical: 16.0),
                           child: CupertinoButton(
                             onPressed: () {
+                              showDialog(
+                                context: context,
+                                builder: (context) => CupertinoAlertDialog(
+                                  title: Text('Crear cuenta'),
+                                  content: Text('¿Estás seguro de crear la cuenta: ${camaronAddUserProvider.user}'),
+                                  actions: [
+                                    CupertinoDialogAction(
+                                      child: Text('Cancelar'),
+                                      onPressed: () {
+                                        Navigator.pop(context);
+                                      },
+                                    ),
+                                    CupertinoDialogAction(
+                                      child: Text('Crear'),
+                                      onPressed: () {
+                                        // espera a que se envie la peticion y hace pop
+                                        // camaronAddUserProvider.enviarPeticionAddUser().then((value){
+                                        //   Navigator.pop(context);
+
+                                        // });
+                                        camaronAddUserProvider.enviarPeticionAddUser();
+                                        Navigator.pop(context);
+
+                                      },
+                                    ),
+                                  ],
+                                ),
+                              );
                               // if (_formKey.currentState.validate()) {
                               //   _formKey.currentState.save();
                               //   // Aquí puedes enviar los datos de registro al servidor
