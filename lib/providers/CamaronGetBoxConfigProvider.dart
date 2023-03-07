@@ -1,11 +1,12 @@
+import 'package:flutter/material.dart';
 import 'package:sensores_app_v2/models/camaronGetBoxConfig.dart';
 import 'package:flutter/foundation.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 class CamaronGetBoxConfigProvider with ChangeNotifier  {
-  List<String> columns = ["configuracion","Codigo","valor"];
-  List<List<String>> rows = [];
+  List<String> _columns = ["configuracion","Codigo","valor"];
+  List<List<String>> _rows = [];
   final url = Uri.https('kmf7eub7se.execute-api.us-west-1.amazonaws.com','/camaronGetBoxConfig');
   CamaronGetBoxConfig camaronGetBoxConfig = CamaronGetBoxConfig(
     status: 0,
@@ -31,21 +32,31 @@ class CamaronGetBoxConfigProvider with ChangeNotifier  {
     )
   );
 
-  
+  set rows(List<List<String>> rows){
+    _rows = rows;
+    notifyListeners();
+  }
+
+  set columns(List<String> columns){
+    _columns = columns;
+    notifyListeners();
+  }
+
+  List<List<String>> get rows => _rows;
+  List<String> get columns => _columns;
 
   CamaronGetBoxConfigProvider(){
     getCamaronGetBoxConfig();
   }
 
 
-  Future<void> getCamaronGetBoxConfig() async {
-    final response = await http.get(url);
-    try{
+  Future<List<List<String>>> getCamaronGetBoxConfig() async {
+    await http.get(url).then((response){
       final decodedData = json.decode(response.body);
       final camaronGetBoxConfig = new CamaronGetBoxConfig.fromJson(decodedData);
       this.camaronGetBoxConfig = camaronGetBoxConfig;
 
-      rows = [
+      _rows = [
         ["Frecuencia","frecuencia",camaronGetBoxConfig.body.frecuencia.toString()],
         ["Maximo de lluvia","max_LLUVIA",camaronGetBoxConfig.body.maxLluvia.toString()],
         ["Minimo de nivel","min_NIVEL",camaronGetBoxConfig.body.minNivel.toString()],
@@ -65,13 +76,16 @@ class CamaronGetBoxConfigProvider with ChangeNotifier  {
         ["Minimo de salinidad","min_SAL",camaronGetBoxConfig.body.minSal.toString()],
         ["Maximo de turbidez","max_TURBIDEZ",camaronGetBoxConfig.body.maxTurbidez.toString()],
       ];
-
       notifyListeners();
+      return _rows;
 
-    }catch(e){
-      print("si ves esto es que no se pudo conectar a la api /camaronGetBoxConfig");
-      print(e);
-    }
+      
+    }).catchError((error){
+      print(error);
+      return _rows;
+    });
+    return _rows;
+    
   }
 
   

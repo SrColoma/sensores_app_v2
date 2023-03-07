@@ -55,17 +55,17 @@ class SensoresPage extends StatelessWidget {
             TopBarSliver(),
 
             // boton dentro de un sliver que redirige a la pagina de testroom
-            SliverToBoxAdapter(
-              child: Padding(
-                padding: const EdgeInsets.all(20.0),
-                child: ElevatedButton(
-                  child: Text("Test Room"),
-                  onPressed: () {
-                    Navigator.of(context).pushReplacementNamed(TestRoomPage.routeName);
-                  },
-                ),
-              ),
-            ),
+            // SliverToBoxAdapter(
+            //   child: Padding(
+            //     padding: const EdgeInsets.all(20.0),
+            //     child: ElevatedButton(
+            //       child: Text("Test Room"),
+            //       onPressed: () {
+            //         Navigator.of(context).pushReplacementNamed(TestRoomPage.routeName);
+            //       },
+            //     ),
+            //   ),
+            // ),
 
             // si no ha seleccionado una piscina muestra un mensaje y no muestra los graficos
             // si ha seleccionado una piscina muestra los graficos

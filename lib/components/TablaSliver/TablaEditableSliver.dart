@@ -6,8 +6,8 @@ import 'package:sensores_app_v2/components/TablaSliver/CustomEditableDataTable.d
 class TablaEditableSliver extends StatelessWidget {
   final String titulo;
   final String descripcion;
-  final List<String> columns;
-  final List<List<String>> rows;
+  List<String> columns;
+  List<List<String>> rows;
 
   TablaEditableSliver({
     super.key, 

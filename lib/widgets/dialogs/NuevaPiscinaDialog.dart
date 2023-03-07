@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sensores_app_v2/providers/CamaronAddPiscinaProvider.dart';
+import 'package:sensores_app_v2/providers/CamaronGetPiscinasProvider.dart';
 
 class NuevaPiscinaDialog extends StatefulWidget {
 
@@ -19,6 +20,7 @@ class _NuevaPiscinaDialogState extends State<NuevaPiscinaDialog> {
   Widget build(BuildContext context) {
 
     final camaronAddPiscinaProvider = Provider.of<CamaronAddPiscinaProvider>(context);
+    final camaronGetPiscinasProvider = Provider.of<CamaronGetPiscinasProvider>(context);
 
     return CupertinoAlertDialog(
       title: const Text('Nueva Piscina\n'),
@@ -71,11 +73,16 @@ class _NuevaPiscinaDialogState extends State<NuevaPiscinaDialog> {
                   CupertinoDialogAction(
                     child: Text('Aceptar'),
                     onPressed: () {
-                      Navigator.of(context).pop();
                       //TODO: aqui comienza a crearse un nuevo censo
+                      camaronGetPiscinasProvider.rows = [];
+                      camaronGetPiscinasProvider.piscinas = [];
                       camaronAddPiscinaProvider.nombre = _nombre;
                       camaronAddPiscinaProvider.capacidad = _capacidad;
-                      camaronAddPiscinaProvider.enviarPeticionAddPiscina();
+                      camaronAddPiscinaProvider.enviarPeticionAddPiscina().then((value) => {
+                        camaronGetPiscinasProvider.getCamaronGetPiscinas()
+                      });
+                      Navigator.of(context).pop();
+
                     },
                   ),
                 ],

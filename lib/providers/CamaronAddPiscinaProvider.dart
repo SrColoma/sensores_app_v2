@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'dart:convert';
+
 import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
@@ -31,8 +31,10 @@ class CamaronAddPiscinaProvider with ChangeNotifier{
         "nombre": nombre,
         "capacidad": capacidad,
       }),
-    );
-    notifyListeners();
+    ).then((value){
+      notifyListeners();
+
+    });
   }
 
 }

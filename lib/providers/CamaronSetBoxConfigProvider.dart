@@ -11,7 +11,7 @@ import 'package:sensores_app_v2/providers/CamaronGetBoxConfigProvider.dart';
 class CamaronSetBoxConfigProvider with ChangeNotifier{
 
   final url = Uri.https('kmf7eub7se.execute-api.us-west-1.amazonaws.com','/camaronSetBoxConfig');
-  Configuracion configuracion = Configuracion(
+  Configuracion _configuracion = Configuracion(
         frecuencia:0.0,
         maxLluvia:0.0,
         minNivel:0.0,
@@ -33,7 +33,7 @@ class CamaronSetBoxConfigProvider with ChangeNotifier{
   );
 
   set setConfiguracion(Configuracion configuracion){
-    this.configuracion = configuracion;
+    _configuracion = configuracion;
     notifyListeners();
   }
 
@@ -47,10 +47,10 @@ class CamaronSetBoxConfigProvider with ChangeNotifier{
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
-      body: jsonEncode(configuracion.toJson()),
-    );
-    notifyListeners();
+      body: jsonEncode(_configuracion.toJson()),
+    ).then((value) => notifyListeners());
   }
+
 }
 
 // {

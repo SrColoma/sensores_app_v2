@@ -131,8 +131,11 @@ class _NuevoUserDialogState extends State<NuevoUserDialog> {
                       camaronAddUserProvider.email = _email;
                       camaronAddUserProvider.password = _contrasenia;
                       camaronAddUserProvider.rol = _rol;
-                      camaronAddUserProvider.enviarPeticionAddUser();
-                      camaronGetUsersProvider.getCamaronGetUsers();
+                      camaronGetUsersProvider.rows = [];
+                      camaronAddUserProvider.enviarPeticionAddUser().then((value){
+                        camaronGetUsersProvider.getCamaronGetUsers();
+
+                      });
 
                     },
                   ),

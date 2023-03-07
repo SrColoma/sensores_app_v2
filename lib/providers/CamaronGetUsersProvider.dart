@@ -5,7 +5,7 @@ import 'package:sensores_app_v2/models/CamaronGetUsers.dart';
 
 class CamaronGetUsersProvider with ChangeNotifier {
   List<String> columns = ["id","email","user","password","rol"];
-  List<List<String>> rows = [];
+  List<List<String>> _rows = [];
   CamaronGetUsers camaronGetUsers = CamaronGetUsers(
     status: 0,
     body: Body(
@@ -14,6 +14,13 @@ class CamaronGetUsersProvider with ChangeNotifier {
       scannedCount: 0,
     ),
   );
+
+  set rows (List<List<String>> rows){
+    _rows = rows;
+    notifyListeners();
+  }
+
+  List<List<String>> get rows => _rows;
 
   final url = Uri.https('kmf7eub7se.execute-api.us-west-1.amazonaws.com','/camaronGetUsers');
 
@@ -27,9 +34,9 @@ class CamaronGetUsersProvider with ChangeNotifier {
       final decodedData = json.decode(response.body);
       final camaronGetUsers = CamaronGetUsers.fromJson(decodedData);
       this.camaronGetUsers = camaronGetUsers;
-      rows = [];
+      _rows = [];
       for (var i = 0; i < camaronGetUsers.body.items.length; i++) {
-        rows.add([
+        _rows.add([
           camaronGetUsers.body.items[i].id,
           camaronGetUsers.body.items[i].email,
           camaronGetUsers.body.items[i].user,

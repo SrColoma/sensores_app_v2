@@ -56,24 +56,28 @@ class PiscinasPage extends StatelessWidget {
                 ),
               ),
             ),
+            
 
-
-            SliverPadding(
-              padding: const EdgeInsets.all(16.0),
-              sliver: SliverGrid(
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: columnCount,
-                  crossAxisSpacing: 10,
-                  mainAxisSpacing: 10,
-                  childAspectRatio: 2.5,
+            camaronGetPiscinasProvider.rows.isNotEmpty
+            ? SliverPadding(
+                padding: const EdgeInsets.all(16.0),
+                sliver: SliverGrid(
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: columnCount,
+                    crossAxisSpacing: 10,
+                    mainAxisSpacing: 10,
+                    childAspectRatio: 2.5,
+                  ),
+                  delegate: SliverChildBuilderDelegate(
+                    (context, index) => PiscinasGrid(index: index),
+                    // childCount: sessionProvider.piscinas.length,
+                    childCount: camaronGetPiscinasProvider.piscinas.length,
+                  ),
                 ),
-                delegate: SliverChildBuilderDelegate(
-                  (context, index) => PiscinasGrid(index: index),
-                  // childCount: sessionProvider.piscinas.length,
-                  childCount: camaronGetPiscinasProvider.piscinas.length,
-                ),
+              )
+            : const SliverToBoxAdapter(
+                child: Center(child: CircularProgressIndicator()),
               ),
-            ),
 
             
           ],

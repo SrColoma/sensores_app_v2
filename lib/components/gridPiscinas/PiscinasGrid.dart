@@ -16,11 +16,14 @@ class PiscinasGrid extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     final sessionProvider = Provider.of<SessionProvider>(context);
     final camaronGetPiscinasProvider = Provider.of<CamaronGetPiscinasProvider>(context);
+
     return InkWell(
       borderRadius: BorderRadius.circular(20),
-      onTap: () => sessionProvider.piscina = camaronGetPiscinasProvider.piscinas[index],
+      // onTap: () => sessionProvider.piscina = camaronGetPiscinasProvider.piscinas[index],
+      onTap: () => sessionProvider.piscina = camaronGetPiscinasProvider.rows[index][1],
       child: Card(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(20),
@@ -30,10 +33,49 @@ class PiscinasGrid extends StatelessWidget {
           child: Stack(
             children: [
               Center(
-                child: Text(camaronGetPiscinasProvider.piscinas[index])
+                child: 
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    // mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(camaronGetPiscinasProvider.rows[index][1]),
+                      // boton para eliminar la piscina
+                      IconButton(
+                        // icono de ver detalles
+                        icon: const Icon(Icons.tune_rounded,color: Colors.blue,),
+                        // icon: const Icon(Icons.delete,color: Colors.red,),
+                        // onPressed: () => camaronGetPiscinasProvider.deletePiscina(camaronGetPiscinasProvider.rows[index][0]),
+                        onPressed: () {
+                          showDialog(
+                            context: context,
+                            builder: (context) => AlertDialog(
+                              title: Text(camaronGetPiscinasProvider.rows[index][1]),
+                              content: Text("Capacidad: ${camaronGetPiscinasProvider.rows[index][3]}"),
+                              // actions: [
+                              //   TextButton(
+                              //     child: const Text('Eliminar',style: TextStyle(color: Colors.red),),
+                              //     onPressed: () {
+                              //       Navigator.pop(context);
+                              //       camaronGetPiscinasProvider.deletePiscina(camaronGetPiscinasProvider.rows[index][0]);
+                              //     },
+                              //   ),
+                              //   TextButton(
+                              //     child: const Text('Ok'),
+                              //     onPressed: () {
+                              //       Navigator.pop(context);
+                              //       // camaronGetPiscinasProvider.deletePiscina(index);
+                              //     },
+                              //   ),
+                              // ],
+                            ),
+                          );
+                        },
+                      ),
+                    ],
+                  )
               ),
               StatusDot( 
-                sessionProvider.piscina == camaronGetPiscinasProvider.piscinas[index] 
+                sessionProvider.piscina == camaronGetPiscinasProvider.rows[index][1]
                 ? Colors.green 
                 : Colors.white,
               ),

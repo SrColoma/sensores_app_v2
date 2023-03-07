@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sensores_app_v2/providers/CamaronAddUserProvider.dart';
+import 'package:sensores_app_v2/providers/CamaronGetUsersProvider.dart';
 
 import '../components/TopBarSliver.dart';
 import '../providers/PageProvider.dart';
@@ -16,6 +17,7 @@ class CrearCuentaPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final pageProvider = Provider.of<PageProvider>(context);
     final camaronAddUserProvider = Provider.of<CamaronAddUserProvider>(context);
+    final camaronGetUsersProvider = Provider.of<CamaronGetUsersProvider>(context);
 
     pageProvider.routeName = routeName;
     pageProvider.title = title;
@@ -100,6 +102,7 @@ class CrearCuentaPage extends StatelessWidget {
 
                         CupertinoTextField(
                           placeholder: 'Contraseña',
+                          obscureText: true,
                           onChanged: (value) => {
                             camaronAddUserProvider.setPassword = value,
                           }
@@ -136,8 +139,9 @@ class CrearCuentaPage extends StatelessWidget {
                                         //   Navigator.pop(context);
 
                                         // });
+                                        
                                         camaronAddUserProvider.enviarPeticionAddUser();
-                                        Navigator.pop(context);
+                                        // Navigator.pop(context);
 
                                       },
                                     ),

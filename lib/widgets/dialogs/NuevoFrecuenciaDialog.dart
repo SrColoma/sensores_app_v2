@@ -92,7 +92,7 @@ class _NuevoFrecuenciaDialogState extends State<NuevoFrecuenciaDialog> {
                       // cambia la configuracion de la caja
                       actualConf['frecuencia'] = _selectedFrequency.inSeconds;
                       // envia la nueva configuracion
-                      camaronSetBoxConfigProvider.configuracion = Configuracion.fromJson(actualConf);
+                      camaronSetBoxConfigProvider.setConfiguracion = Configuracion.fromJson(actualConf);
                       camaronSetBoxConfigProvider.enviarPeticionSetBoxConfig();
                       Navigator.of(context).pop();
 

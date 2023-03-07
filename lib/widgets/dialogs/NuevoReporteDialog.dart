@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sensores_app_v2/providers/CamaronGetPiscinasProvider.dart';
+import 'package:sensores_app_v2/providers/CamaronGetReportesProvider.dart';
 import 'package:sensores_app_v2/providers/SessionProvider.dart';
 
 class NuevoReporteDialog extends StatefulWidget {
@@ -16,15 +17,17 @@ class _NuevoReporteDialogState extends State<NuevoReporteDialog> {
   DateTime _dateFin = DateTime.now();
   // var _piscinaList = ['Piscina 1', 'Piscina 2', 'Piscina 3'];
   // var _selectedPiscina = 'Piscina 1';
+  var _selectedPiscina = "";
   
   @override
   Widget build(BuildContext context) {
 
     final camaronGetPiscinasProvider = Provider.of<CamaronGetPiscinasProvider>(context);
+    final camaronGetReportesProvider = Provider.of<CamaronGetReportesProvider>(context);
     final sessionProvider = Provider.of<SessionProvider>(context);
-
     var _piscinaList = camaronGetPiscinasProvider.piscinas;
-    var _selectedPiscina = sessionProvider.piscina;
+    _selectedPiscina = _piscinaList[0];
+
 
     return CupertinoAlertDialog(
       title: Text('Nuevo Reporte'),
@@ -43,8 +46,8 @@ class _NuevoReporteDialogState extends State<NuevoReporteDialog> {
                   child: CupertinoPicker(
                     itemExtent: 32,
                     onSelectedItemChanged: (value) {
-                      setState(() {
                         _selectedPiscina = _piscinaList[value];
+                      setState(() {
                       });
                     },
                     children: _piscinaList.map((e) => Text(e)).toList(),
@@ -126,7 +129,7 @@ class _NuevoReporteDialogState extends State<NuevoReporteDialog> {
           },
         ),
         CupertinoDialogAction(
-          child: Text('Censar'),
+          child: Text('Crear Reporte'),
           onPressed:  
           //si la fecha de fin es menor a la fecha actual 
           //y la fecha de inicio es menor a la fecha de fin
@@ -160,6 +163,14 @@ class _NuevoReporteDialogState extends State<NuevoReporteDialog> {
                     onPressed: () {
                       Navigator.of(context).pop();
                       //TODO: aqui comienza a adquirir un nuevo reporte
+                      camaronGetReportesProvider.rows = [];
+                      camaronGetReportesProvider.addReporte(
+                        _dateInicio.toIso8601String(),
+                        _dateFin.toIso8601String(),
+                        _selectedPiscina
+                      ).then((value){
+                        camaronGetReportesProvider.getCamaronGetReportes();
+                      });
                     },
                   ),
                 ],

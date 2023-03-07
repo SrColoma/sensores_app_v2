@@ -5,8 +5,8 @@ import 'package:sensores_app_v2/widgets/dialogs/ChangeConfigDialog.dart';
 import 'package:sensores_app_v2/widgets/dialogs/NuevaPiscinaDialog.dart';
 
 class CustomEditableDataTable extends StatelessWidget {
-  final List<String> columns;
-  final List<List<String>> rows;
+  List<String> columns;
+  List<List<String>> rows;
 
   CustomEditableDataTable({
     required this.columns, 

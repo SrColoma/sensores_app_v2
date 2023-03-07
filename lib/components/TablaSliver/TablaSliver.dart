@@ -19,16 +19,19 @@ class TablaSliver extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SliverToBoxAdapter(
-      child: Column(
-        children: [
-          const SizedBox(height: 20,),
-          Text(titulo,style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
-          Text(descripcion),
-          CustomDataTable(
-            columns: columns,
-            rows: rows,
-          )
-        ],
+      child: SingleChildScrollView(
+        scrollDirection: Axis.horizontal,
+        child: Column(
+          children: [
+            const SizedBox(height: 20,),
+            Text(titulo,style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
+            Text(descripcion),
+            CustomDataTable(
+              columns: columns,
+              rows: rows,
+            )
+          ],
+        ),
       ),
     );
   }

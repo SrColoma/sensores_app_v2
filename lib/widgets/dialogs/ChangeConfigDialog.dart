@@ -73,12 +73,16 @@ class _ChangeConfigDialogState extends State<ChangeConfigDialog> {
                     onPressed: () {
                       // consulta la configuracion de la caja
                       Map<String, dynamic> actualConf = camaronGetBoxConfigProvider.camaronGetBoxConfig.body.toJson();
+                      camaronGetBoxConfigProvider.rows = [];
                       // cambia la configuracion de la caja
                       actualConf[widget.nombre] = double.parse(_valor);
                       // envia la nueva configuracion
-                      camaronSetBoxConfigProvider.configuracion = Configuracion.fromJson(actualConf);
-                      camaronSetBoxConfigProvider.enviarPeticionSetBoxConfig();
-                      camaronGetBoxConfigProvider.getCamaronGetBoxConfig();
+                      camaronSetBoxConfigProvider.setConfiguracion = Configuracion.fromJson(actualConf);
+                      camaronSetBoxConfigProvider.enviarPeticionSetBoxConfig().then((value) {
+                        camaronGetBoxConfigProvider.getCamaronGetBoxConfig();
+
+                      });
+                      
                           
                       Navigator.of(context).pop();
                       

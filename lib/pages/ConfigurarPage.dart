@@ -55,6 +55,8 @@ class _ConfigurarPageState extends State<ConfigurarPage> {
             : const SliverToBoxAdapter(
                 child: Center(child: CircularProgressIndicator()),
               ),
+            
+            
 
           ],
         ),
