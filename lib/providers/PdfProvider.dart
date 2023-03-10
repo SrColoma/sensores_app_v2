@@ -3,7 +3,8 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
-import 'package:pdf/widgets.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:path/path.dart' as path;
 
 class PdfProvider with ChangeNotifier {
   static Future<void> generatePdf(List<String> columns, List<List<String>> rows, String titulo) async {
@@ -42,8 +43,23 @@ class PdfProvider with ChangeNotifier {
     );
 
     // final file = File('/home/sr-coloma/Descargas/00AA/$titulo.pdf');
-    final file = File('$titulo.pdf');
-    await file.writeAsBytes(await pdf.save());
+    // final file = File('$titulo.pdf');
+    // await file.writeAsBytes(await pdf.save())
+
+
+    // final bytes = await pdf.save();
+    // final filePath = '../$titulo.pdf';
+    // final file = File(filePath);
+    // print(file.path);
+    // await file.writeAsBytes(bytes);
+
+    final bytes = await pdf.save();
+    final fileName = '$titulo.pdf';
+    final filePath = path.join(
+        Platform.environment['USERPROFILE']!, 'Downloads', fileName);
+    final file = File(filePath);
+    await file.writeAsBytes(bytes);
+
   }
   
 }
