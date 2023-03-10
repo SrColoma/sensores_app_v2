@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:sensores_app_v2/providers/CamaronGetPiscinasProvider.dart';
 import 'package:sensores_app_v2/providers/CamaronGetReportesProvider.dart';
 import 'package:sensores_app_v2/providers/SessionProvider.dart';
+import 'package:intl/intl.dart';
 
 class NuevoReporteDialog extends StatefulWidget {
   const NuevoReporteDialog({super.key});
@@ -165,8 +166,8 @@ class _NuevoReporteDialogState extends State<NuevoReporteDialog> {
                       //TODO: aqui comienza a adquirir un nuevo reporte
                       camaronGetReportesProvider.rows = [];
                       camaronGetReportesProvider.addReporte(
-                        _dateInicio.toIso8601String(),
-                        _dateFin.toIso8601String(),
+                        DateFormat('yyyy-MM-dd').format(_dateInicio),
+                        DateFormat('yyyy-MM-dd').format(_dateFin),
                         _selectedPiscina
                       ).then((value){
                         camaronGetReportesProvider.getCamaronGetReportes();

@@ -5,7 +5,7 @@ import 'package:flutter/widgets.dart';
 import 'package:http/http.dart' as http;
 
 class CamaronAddUserProvider with ChangeNotifier{
-  final url = Uri.https('kmf7eub7se.execute-api.us-west-1.amazonaws.com','/camaronAddUser');
+  final url = Uri.https('daserldsli.execute-api.us-west-1.amazonaws.com','/camaronAddUser');
   String user = "";
   String password = "";
   String email = "";

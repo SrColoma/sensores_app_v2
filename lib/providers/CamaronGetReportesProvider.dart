@@ -27,7 +27,7 @@ class CamaronGetReportesProvider with ChangeNotifier {
     _columns = value;
   }
 
-  final url = Uri.https('kmf7eub7se.execute-api.us-west-1.amazonaws.com','/camaronGetReportes');
+  final url = Uri.https('daserldsli.execute-api.us-west-1.amazonaws.com','/camaronGetReportes');
 
   CamaronGetReportesProvider(){
     getCamaronGetReportes();
@@ -55,7 +55,7 @@ class CamaronGetReportesProvider with ChangeNotifier {
   }
 
   Future<void> addReporte(String inicio,String fin,String piscina){
-    final url = Uri.https('kmf7eub7se.execute-api.us-west-1.amazonaws.com','/camaronAddReporte');
+    final url = Uri.https('daserldsli.execute-api.us-west-1.amazonaws.com','/camaronAddReporte');
     final body = json.encode({"inicio":inicio,"fin":fin,"piscina":piscina});
     // final body = json.encode({"id":id});
     final headers = {'Content-Type': 'application/json'};

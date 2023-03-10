@@ -56,7 +56,7 @@ class CamaronGetAllValoresProvider with ChangeNotifier {
 
   Future<void> getCamaronGetAllValores() async {
     // final url = Uri.http(dotenv.env['BASE_URL_API']!, '/camaronGetAllValores');
-    final url = Uri.https('kmf7eub7se.execute-api.us-west-1.amazonaws.com','/camaronGetAllValores');
+    final url = Uri.https('daserldsli.execute-api.us-west-1.amazonaws.com','/camaronGetAllValores');
     try{
       isLoading = true;
 
@@ -89,6 +89,24 @@ class CamaronGetAllValoresProvider with ChangeNotifier {
       print("si ves esto es que no se pudo conectar a la api /camaronGetAllValores");
       print(e);
     }
+  }
+
+  List<List<String>> getRango(String row, String row2) {
+    List<List<String>> rows2 = [];
+    int index = rows.indexWhere((element) => element[0] == row);
+    int index2 = rows.indexWhere((element) => element[0] == row2);
+    if (index == -1 || index2 == -1) {
+      return rows2;
+    }
+    if (index > index2) {
+      int aux = index;
+      index = index2;
+      index2 = aux;
+    }
+    for (int i = index; i <= index2; i++) {
+      rows2.add(rows[i]);
+    }
+    return rows2;
   }
 
 }

@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 
-import 'CustomDataTable.dart';
+import 'CustomDescargableDataTable.dart';
 
-class TablaSliver extends StatelessWidget {
+class TablaDescargableSliver extends StatelessWidget {
   final String titulo;
   final String descripcion;
   final List<String> columns;
   final List<List<String>> rows;
 
-  TablaSliver({
+  const TablaDescargableSliver({
     super.key, 
     required this.titulo, 
     required this.descripcion, 
@@ -28,7 +28,7 @@ class TablaSliver extends StatelessWidget {
               const SizedBox(height: 20,),
               Text(titulo,style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
               Text(descripcion),
-              CustomDataTable(
+              CustomDescargableDataTable(
                 columns: columns,
                 rows: rows,
               )

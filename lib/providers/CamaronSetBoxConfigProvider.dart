@@ -10,7 +10,7 @@ import 'package:sensores_app_v2/providers/CamaronGetBoxConfigProvider.dart';
 
 class CamaronSetBoxConfigProvider with ChangeNotifier{
 
-  final url = Uri.https('kmf7eub7se.execute-api.us-west-1.amazonaws.com','/camaronSetBoxConfig');
+  final url = Uri.https('daserldsli.execute-api.us-west-1.amazonaws.com','/camaronSetBoxConfig');
   Configuracion _configuracion = Configuracion(
         frecuencia:0.0,
         maxLluvia:0.0,

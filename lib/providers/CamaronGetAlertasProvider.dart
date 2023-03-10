@@ -29,7 +29,7 @@ class CamaronGetAlertasProvider with ChangeNotifier{
   CamaronGetAlertas get camaronGetAlertas => _camaronGetAlertas;
 
   Future<void> getCamaronGetAlertas() async {
-    final url = Uri.https('kmf7eub7se.execute-api.us-west-1.amazonaws.com','/camaronGetAlertas');
+    final url = Uri.https('daserldsli.execute-api.us-west-1.amazonaws.com','/camaronGetAlertas');
     try{
       final resp = await http.get(url);
       final decodedData = json.decode(resp.body);

@@ -7,7 +7,7 @@ import 'package:http/http.dart' as http;
 class CamaronGetBoxConfigProvider with ChangeNotifier  {
   List<String> _columns = ["configuracion","Codigo","valor"];
   List<List<String>> _rows = [];
-  final url = Uri.https('kmf7eub7se.execute-api.us-west-1.amazonaws.com','/camaronGetBoxConfig');
+  final url = Uri.https('daserldsli.execute-api.us-west-1.amazonaws.com','/camaronGetBoxConfig');
   CamaronGetBoxConfig camaronGetBoxConfig = CamaronGetBoxConfig(
     status: 0,
     body: Body(

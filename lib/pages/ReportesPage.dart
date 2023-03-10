@@ -7,6 +7,7 @@ import 'package:sensores_app_v2/providers/CamaronGetAlertasProvider.dart';
 import 'package:sensores_app_v2/providers/CamaronGetReportesProvider.dart';
 import 'package:sensores_app_v2/widgets/dialogs/NuevoReporteDialog.dart';
 
+import '../components/TablaSliver/TablaDescargableSliver.dart';
 import '../providers/PageProvider.dart';
 
 class ReportesPage extends StatelessWidget {
@@ -37,7 +38,7 @@ class ReportesPage extends StatelessWidget {
             TopBarSliver(),
 
             camaronGetReportesProvider.rows.isNotEmpty
-            ? TablaSliver(
+            ? TablaDescargableSliver(
                 titulo: "Reportes",
                 descripcion: "Reportes",
                 columns: camaronGetReportesProvider.columns,

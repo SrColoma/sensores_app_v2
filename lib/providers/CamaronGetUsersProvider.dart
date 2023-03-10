@@ -22,7 +22,7 @@ class CamaronGetUsersProvider with ChangeNotifier {
 
   List<List<String>> get rows => _rows;
 
-  final url = Uri.https('kmf7eub7se.execute-api.us-west-1.amazonaws.com','/camaronGetUsers');
+  final url = Uri.https('daserldsli.execute-api.us-west-1.amazonaws.com','/camaronGetUsers');
 
   CamaronGetUsersProvider(){
     getCamaronGetUsers();

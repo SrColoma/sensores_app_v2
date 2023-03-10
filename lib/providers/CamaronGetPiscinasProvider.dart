@@ -36,7 +36,7 @@ class CamaronGetPiscinasProvider with ChangeNotifier{
   List<List<String>> get rows => _rows;
   List<String> get piscinas => _piscinas;
 
-  final url = Uri.https('kmf7eub7se.execute-api.us-west-1.amazonaws.com','/camaronGetPiscinas');
+  final url = Uri.https('daserldsli.execute-api.us-west-1.amazonaws.com','/camaronGetPiscinas');
 
   CamaronGetPiscinasProvider(){
     getCamaronGetPiscinas();
@@ -65,7 +65,7 @@ class CamaronGetPiscinasProvider with ChangeNotifier{
   }
 
   Future<void> deletePiscina(String id){
-    final url = Uri.https('kmf7eub7se.execute-api.us-west-1.amazonaws.com','/CamaronRemovePiscina');
+    final url = Uri.https('daserldsli.execute-api.us-west-1.amazonaws.com','/CamaronRemovePiscina');
     final body = json.encode({"id":id});
     final headers = {'Content-Type': 'application/json'};
     return http.post(url, body: body, headers: headers).then((response){
