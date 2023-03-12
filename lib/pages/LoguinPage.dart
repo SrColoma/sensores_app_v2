@@ -7,6 +7,7 @@ import 'package:sensores_app_v2/pages/PiscinasPage.dart';
 import 'package:sensores_app_v2/pages/SensoresPage.dart';
 import 'package:sensores_app_v2/providers/CamaronGetUsersProvider.dart';
 import 'package:sensores_app_v2/providers/SessionProvider.dart';
+import 'package:sensores_app_v2/widgets/dialogs/NuevoUserDialog.dart';
 
 class LoguinPage extends StatelessWidget {
   static const routeName = 'LoguinPage';
@@ -99,7 +100,10 @@ class LoguinPage extends StatelessWidget {
               CupertinoButton(
                 child: Text('crear Cuenta', style: TextStyle(color: Colors.blueGrey),),
                 onPressed: () => {
-                  Navigator.pushNamed(context, CrearCuentaPage.routeName)
+                  showDialog(
+                    context: context, 
+                    builder: (context) => NuevoUserDialog()
+                  )
                 },
               )
 

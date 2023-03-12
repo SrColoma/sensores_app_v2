@@ -44,7 +44,7 @@ class PdfProvider with ChangeNotifier {
 
     // final file = File('/home/sr-coloma/Descargas/00AA/$titulo.pdf');
     // final file = File('$titulo.pdf');
-    // await file.writeAsBytes(await pdf.save())
+    // await file.writeAsBytes(await pdf.save());
 
 
     // final bytes = await pdf.save();

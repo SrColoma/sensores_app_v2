@@ -40,7 +40,8 @@ class CamaronGetUsersProvider with ChangeNotifier {
           camaronGetUsers.body.items[i].id,
           camaronGetUsers.body.items[i].email,
           camaronGetUsers.body.items[i].user,
-          camaronGetUsers.body.items[i].password,
+          // camaronGetUsers.body.items[i].password,
+          "********",
           camaronGetUsers.body.items[i].rol,
         ]);
       }

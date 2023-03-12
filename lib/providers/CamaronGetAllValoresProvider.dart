@@ -10,28 +10,28 @@ class CamaronGetAllValoresProvider with ChangeNotifier {
   List<List<String>> rows = [];
 
   List<Sensor> _sensores = [
-    Sensor(imagen: 'assets/images/TDS.jpg', titulo: 'TDS', media: '1',
+    Sensor(imagen: 'assets/images/TDS.jpg', titulo: 'TDS', media: 'Ppm',
       puntos: []
     ),
-    Sensor(imagen: 'assets/images/temperatura.jpg', titulo: 'temperatura', media: '1',
+    Sensor(imagen: 'assets/images/temperatura.jpg', titulo: 'temperatura', media: '°C',
       puntos: []
     ),
-    Sensor(imagen: 'assets/images/turbidez.jpg', titulo: 'turbidez', media: '1',
+    Sensor(imagen: 'assets/images/turbidez.jpg', titulo: 'turbidez', media: 'NTU',
       puntos: []
     ),
-    Sensor(imagen: 'assets/images/PH.jpg', titulo: 'oxdix', media: '1',
+    Sensor(imagen: 'assets/images/PH.jpg', titulo: 'oxdix', media: 'mg/L',
       puntos: []
     ),
-    Sensor(imagen: 'assets/images/PH.jpg', titulo: 'ph', media: '1',
+    Sensor(imagen: 'assets/images/PH.jpg', titulo: 'ph', media: '',
       puntos: []
     ),
-    Sensor(imagen: 'assets/images/PH.jpg', titulo: 'lluvia', media: '1',
+    Sensor(imagen: 'assets/images/PH.jpg', titulo: 'lluvia', media: '',
       puntos: []
     ),
-    Sensor(imagen: 'assets/images/PH.jpg', titulo: 'sal', media: '1',
+    Sensor(imagen: 'assets/images/PH.jpg', titulo: 'sal', media: '',
       puntos: []
     ),
-    Sensor(imagen: 'assets/images/PH.jpg', titulo: 'nivel', media: '1',
+    Sensor(imagen: 'assets/images/PH.jpg', titulo: 'nivel', media: '',
       puntos: []
     ),
   ];

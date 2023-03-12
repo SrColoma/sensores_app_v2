@@ -18,7 +18,7 @@ class _NuevoReporteDialogState extends State<NuevoReporteDialog> {
   DateTime _dateFin = DateTime.now();
   // var _piscinaList = ['Piscina 1', 'Piscina 2', 'Piscina 3'];
   // var _selectedPiscina = 'Piscina 1';
-  var _selectedPiscina = "";
+  String _selectedPiscina = "";
   
   @override
   Widget build(BuildContext context) {
@@ -27,7 +27,7 @@ class _NuevoReporteDialogState extends State<NuevoReporteDialog> {
     final camaronGetReportesProvider = Provider.of<CamaronGetReportesProvider>(context);
     final sessionProvider = Provider.of<SessionProvider>(context);
     var _piscinaList = camaronGetPiscinasProvider.piscinas;
-    _selectedPiscina = _piscinaList[0];
+    // _selectedPiscina = _piscinaList[0];
 
 
     return CupertinoAlertDialog(
@@ -47,8 +47,8 @@ class _NuevoReporteDialogState extends State<NuevoReporteDialog> {
                   child: CupertinoPicker(
                     itemExtent: 32,
                     onSelectedItemChanged: (value) {
-                        _selectedPiscina = _piscinaList[value];
                       setState(() {
+                        _selectedPiscina = _piscinaList[value];
                       });
                     },
                     children: _piscinaList.map((e) => Text(e)).toList(),
