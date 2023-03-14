@@ -51,6 +51,7 @@ class SensoresPage extends StatelessWidget {
       drawer: MenuDrawer(),
       body: SafeArea(
         child: CustomScrollView(
+          // scrollBehavior: const ScrollBehavior(),
           slivers: [
             TopBarSliver(),
 
@@ -72,21 +73,21 @@ class SensoresPage extends StatelessWidget {
             if (camaronGetPiscinasProvider.piscinas.contains(sessionProvider.piscina))
             // TODO : aqui esta el grafico que se debe repetir
               SliverPadding(
-              padding: const EdgeInsets.all(16.0),
-              sliver: SliverGrid(
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: columnCount,
-                  crossAxisSpacing: 10,//spacing,
-                  mainAxisSpacing: 10,//spacing,
-                  childAspectRatio: 0.8,
+                padding: const EdgeInsets.all(16.0),
+                sliver: SliverGrid(
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: columnCount,
+                    crossAxisSpacing: 10,//spacing,
+                    mainAxisSpacing: 10,//spacing,
+                    childAspectRatio: 0.8,
+                  ),
+                  delegate: SliverChildBuilderDelegate(
+                    (context, index) => SensoresGrid(index: index),
+                    childCount: camaronGetAllValoresProvider.sensores.length,
+                  ),
                 ),
-                delegate: SliverChildBuilderDelegate(
-                  (context, index) => SensoresGrid(index: index),
-                  childCount: camaronGetAllValoresProvider.sensores.length,
-                ),
-              ),
-            )
-            else
+              )
+            else(
               SliverToBoxAdapter(
                 child: Container(
                   height: 50,
@@ -94,7 +95,8 @@ class SensoresPage extends StatelessWidget {
                     child: Text('Selecciona una piscina para ver sus sensores'),
                   ),
                 ),
-              ),
+              )
+            )
 
 
           ],

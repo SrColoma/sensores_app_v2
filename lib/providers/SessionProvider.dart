@@ -18,6 +18,7 @@ class SessionProvider with ChangeNotifier {
   String _user = 'Default';
   String _rol = 'user';
   String _piscina = 'Default';
+  String _fakePiscina = 'piscina1';
   String _mensaje = '';
   bool canUsed = false;
 
@@ -25,6 +26,7 @@ class SessionProvider with ChangeNotifier {
   String get rol => _rol;
   String get piscina => _piscina;
   String get mensaje => _mensaje;
+  String get fakePiscina => _fakePiscina;
 
   // List<Sensor> get sensores => _sensores;
   // List<String> get piscinas => _piscinas;

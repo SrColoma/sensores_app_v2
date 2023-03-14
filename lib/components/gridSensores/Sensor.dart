@@ -11,13 +11,19 @@ class Sensor extends StatelessWidget {
   final String media;
   List<Point> puntos;
 
+  double minimo;
+
+  double maximo;
+
 
   Sensor({
     super.key, 
     required this.imagen, 
     required this.titulo, 
     required this.media, 
-    required this.puntos
+    required this.puntos, 
+    required this.maximo, 
+    required this.minimo
   });
 
 
@@ -38,14 +44,20 @@ class Sensor extends StatelessWidget {
             ),
             
             Text(titulo,style: TextStyle(fontSize: 20),),
-            Text(media,style: TextStyle(fontSize: 20),),
+            Text(
+              'µ: ${calcularMedia(puntos).toStringAsFixed(1)} $media',
+              style: TextStyle(fontSize: 20),
+            ),
           ],
         ),
         // GraficoLineaPorFecha(
         //   data: puntos
         // ),
         GraficoLineaPorFecha(
-          data: puntos
+          data: puntos,
+          minimo: minimo,
+          maximo: maximo,
+          titulo: media,
         ),
         // graficoTMP(
         //   puntos: puntos
@@ -54,5 +66,13 @@ class Sensor extends StatelessWidget {
 
       ],
     );
+  }
+  double calcularMedia(List<Point> puntos) {
+    double suma = 0;
+    for (var punto in puntos) {
+      suma += punto.valor;
+    }
+    double media = suma / puntos.length;
+    return media;
   }
 }

@@ -31,12 +31,17 @@ class SensoresGrid extends StatelessWidget {
             // Center(
             //   child: camaronGetAllValoresProvider.sensores[index]
             // ),
-            !camaronGetAllValoresProvider.isLoading
-            ? Center(
-              child: camaronGetAllValoresProvider.sensores[index]
+            if(sessionProvider.piscina == sessionProvider.fakePiscina)
+              !camaronGetAllValoresProvider.isLoading
+              ? Center(
+                child: camaronGetAllValoresProvider.sensores[index]
+              )
+              : (Center(child: CircularProgressIndicator()))
+            else(
+              Center(
+                child: Text('Piscina no conectada')
+              )
             )
-            : Center(child: CircularProgressIndicator()),
-              
             // StatusDot( 
             //   sessionProvider.piscina == sessionProvider.piscinas[index] ? Colors.green : Colors.white,
             // ),

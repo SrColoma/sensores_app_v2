@@ -27,6 +27,7 @@ class _NuevoReporteDialogState extends State<NuevoReporteDialog> {
     final camaronGetReportesProvider = Provider.of<CamaronGetReportesProvider>(context);
     final sessionProvider = Provider.of<SessionProvider>(context);
     var _piscinaList = camaronGetPiscinasProvider.piscinas;
+    if(_selectedPiscina == "") _selectedPiscina = _piscinaList[0];
     // _selectedPiscina = _piscinaList[0];
 
 
@@ -39,6 +40,9 @@ class _NuevoReporteDialogState extends State<NuevoReporteDialog> {
           CupertinoButton(
             child: Text('Piscina: $_selectedPiscina'),
             onPressed: () {
+              setState(() {
+                _selectedPiscina = _piscinaList[0];
+              });
               showCupertinoModalPopup(
                 context: context, 
                 builder: (context)=> Container(
@@ -131,53 +135,74 @@ class _NuevoReporteDialogState extends State<NuevoReporteDialog> {
         ),
         CupertinoDialogAction(
           child: Text('Crear Reporte'),
-          onPressed:  
-          //si la fecha de fin es menor a la fecha actual 
-          //y la fecha de inicio es menor a la fecha de fin
-          (
-            _dateFin.isBefore(DateTime.now()) 
-            && _dateInicio.isBefore(_dateFin)
-          ) ? () {
-            Navigator.of(context).pop();
-            showCupertinoDialog(
-              context: context,
-              builder: (context) => CupertinoAlertDialog(
-                title: Text('¿Desea obtener el reporte?'),
-                content: Column(
-                  children: [
-                    // Text('Desde: ${_dateInicio.day}'),
-                    // Text('Hasta: ${_dateFin.day}'),
-                    //texto que muestre la fecha de inicio y la fecha de fin
-                    Text('Desde: ${_dateInicio.day}/${_dateInicio.month}/${_dateInicio.year}'),
-                    Text('Hasta: ${_dateFin.day}/${_dateFin.month}/${_dateFin.year}'),
-                  ],
-                ),
-                actions: [
-                  CupertinoDialogAction(
-                    child: Text('Cancelar', style: TextStyle(color: Colors.red),),
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    },
+          onPressed:
+          _selectedPiscina == sessionProvider.fakePiscina
+          ? //si la fecha de fin es menor a la fecha actual 
+            //y la fecha de inicio es menor a la fecha de fin
+            (
+              (
+                _dateFin.isBefore(DateTime.now()) 
+                && _dateInicio.isBefore(_dateFin)
+              ) ? () {
+                Navigator.of(context).pop();
+                showCupertinoDialog(
+                  context: context,
+                  builder: (context) => CupertinoAlertDialog(
+                    title: Text('¿Desea obtener el reporte?'),
+                    content: Column(
+                      children: [
+                        // Text('Desde: ${_dateInicio.day}'),
+                        // Text('Hasta: ${_dateFin.day}'),
+                        //texto que muestre la fecha de inicio y la fecha de fin
+                        Text('Desde: ${_dateInicio.day}/${_dateInicio.month}/${_dateInicio.year}'),
+                        Text('Hasta: ${_dateFin.day}/${_dateFin.month}/${_dateFin.year}'),
+                      ],
+                    ),
+                    actions: [
+                      CupertinoDialogAction(
+                        child: Text('Cancelar', style: TextStyle(color: Colors.red),),
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                      ),
+                      CupertinoDialogAction(
+                        child: Text('Aceptar'),
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                          //TODO: aqui comienza a adquirir un nuevo reporte
+                          camaronGetReportesProvider.rows = [];
+                          camaronGetReportesProvider.addReporte(
+                            DateFormat('yyyy-MM-dd').format(_dateInicio),
+                            DateFormat('yyyy-MM-dd').format(_dateFin),
+                            _selectedPiscina
+                          ).then((value){
+                            camaronGetReportesProvider.getCamaronGetReportes();
+                          });
+                        },
+                      ),
+                    ],
                   ),
-                  CupertinoDialogAction(
-                    child: Text('Aceptar'),
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                      //TODO: aqui comienza a adquirir un nuevo reporte
-                      camaronGetReportesProvider.rows = [];
-                      camaronGetReportesProvider.addReporte(
-                        DateFormat('yyyy-MM-dd').format(_dateInicio),
-                        DateFormat('yyyy-MM-dd').format(_dateFin),
-                        _selectedPiscina
-                      ).then((value){
-                        camaronGetReportesProvider.getCamaronGetReportes();
-                      });
-                    },
-                  ),
-                ],
-              ),
-            );
-          } : null,
+                );
+              } 
+              : (null)
+            )
+            :( null
+              // showDialog(
+              //   context: context,
+              //   builder: (context) => AlertDialog(
+              //     title: Text('Error'),
+              //     content: Text('piscina no conectada'),
+              //     actions: [
+              //       TextButton(
+              //         child: Text('Aceptar'),
+              //         onPressed: () {
+              //           Navigator.of(context).pop();
+              //         },
+              //       ),
+              //     ],
+              //   ),
+              // )
+            ),
         ),
       ],
     );

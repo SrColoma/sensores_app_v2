@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:sensores_app_v2/components/gridSensores/Sensor.dart';
 import 'package:sensores_app_v2/models/Point.dart';
+import 'package:sensores_app_v2/providers/CamaronGetBoxConfigProvider.dart';
 import 'dart:convert';
 import '../models/CamaronGetAllValores.dart';
 import 'package:http/http.dart' as http;
@@ -10,28 +11,28 @@ class CamaronGetAllValoresProvider with ChangeNotifier {
   List<List<String>> rows = [];
 
   List<Sensor> _sensores = [
-    Sensor(imagen: 'assets/images/TDS.jpg', titulo: 'TDS', media: 'Ppm',
+    Sensor(imagen: 'assets/images/TDS.jpg', titulo: 'TDS', media: 'Ppm',minimo: 0,maximo: 0,
       puntos: []
     ),
-    Sensor(imagen: 'assets/images/temperatura.jpg', titulo: 'temperatura', media: '°C',
+    Sensor(imagen: 'assets/images/temperatura.jpg', titulo: 'temperatura', media: '°C',minimo: 0,maximo: 0,
       puntos: []
     ),
-    Sensor(imagen: 'assets/images/turbidez.jpg', titulo: 'turbidez', media: 'NTU',
+    Sensor(imagen: 'assets/images/turbidez.jpg', titulo: 'turbidez', media: 'NTU',minimo: 0,maximo: 0,
       puntos: []
     ),
-    Sensor(imagen: 'assets/images/PH.jpg', titulo: 'oxdix', media: 'mg/L',
+    Sensor(imagen: 'assets/images/PH.jpg', titulo: 'oxdix', media: 'mg/L',minimo: 0,maximo: 0,
       puntos: []
     ),
-    Sensor(imagen: 'assets/images/PH.jpg', titulo: 'ph', media: '',
+    Sensor(imagen: 'assets/images/PH.jpg', titulo: 'ph', media: '',minimo: 0,maximo: 0,
       puntos: []
     ),
-    Sensor(imagen: 'assets/images/PH.jpg', titulo: 'lluvia', media: '',
+    Sensor(imagen: 'assets/images/PH.jpg', titulo: 'lluvia', media: '',minimo: 0,maximo: 0,
       puntos: []
     ),
-    Sensor(imagen: 'assets/images/PH.jpg', titulo: 'sal', media: '',
+    Sensor(imagen: 'assets/images/PH.jpg', titulo: 'sal', media: '',minimo: 0,maximo: 0,
       puntos: []
     ),
-    Sensor(imagen: 'assets/images/PH.jpg', titulo: 'nivel', media: '',
+    Sensor(imagen: 'assets/images/PH.jpg', titulo: 'nivel', media: '',minimo: 0,maximo: 0,
       puntos: []
     ),
   ];
@@ -69,18 +70,36 @@ class CamaronGetAllValoresProvider with ChangeNotifier {
       _sensores.map((sensor) => sensor.puntos =[]);
       rows = _camaronGetAllValores.body.items.map((item) {
 
-        _sensores[0].puntos.add(Point(item.fecha.toString(), item.valores.tds));
-        _sensores[1].puntos.add(Point(item.fecha.toString(), item.valores.temp));
-        _sensores[2].puntos.add(Point(item.fecha.toString(), item.valores.turbidez));
-        _sensores[3].puntos.add(Point(item.fecha.toString(), item.valores.oxdix));
-        _sensores[4].puntos.add(Point(item.fecha.toString(), item.valores.ph));
-        _sensores[5].puntos.add(Point(item.fecha.toString(), item.valores.lluvia));
-        _sensores[6].puntos.add(Point(item.fecha.toString(), item.valores.sal));
-        _sensores[7].puntos.add(Point(item.fecha.toString(), item.valores.nivel));
+        _sensores[0].puntos.add(Point(item.fecha.toIso8601String(), item.valores.tds));
+        _sensores[1].puntos.add(Point(item.fecha.toIso8601String(), item.valores.temp));
+        _sensores[2].puntos.add(Point(item.fecha.toIso8601String(), item.valores.turbidez));
+        _sensores[3].puntos.add(Point(item.fecha.toIso8601String(), item.valores.oxdix));
+        _sensores[4].puntos.add(Point(item.fecha.toIso8601String(), item.valores.ph));
+        _sensores[5].puntos.add(Point(item.fecha.toIso8601String(), item.valores.lluvia));
+        _sensores[6].puntos.add(Point(item.fecha.toIso8601String(), item.valores.sal));
+        _sensores[7].puntos.add(Point(item.fecha.toIso8601String(), item.valores.nivel));
 
-        return item.valores.toJson().values.map<String>((value) => value.toString()).toList()..add(item.fecha.toString());
+        return item.valores.toJson().values.map<String>((value) => value.toString()).toList()..add(item.fecha.toIso8601String());
       }).toList();
-      
+      var configprovider = CamaronGetBoxConfigProvider();
+      configprovider.getCamaronGetBoxConfig().then((value) =>{
+        _sensores[0].minimo = configprovider.getcamaronGetBoxConfig.body.minTds,
+        _sensores[0].maximo = configprovider.getcamaronGetBoxConfig.body.maxTds,
+        _sensores[1].minimo = configprovider.getcamaronGetBoxConfig.body.minTemp,
+        _sensores[1].maximo = configprovider.getcamaronGetBoxConfig.body.maxTemp,
+        _sensores[2].minimo = configprovider.getcamaronGetBoxConfig.body.minTurbidez,
+        _sensores[2].maximo = configprovider.getcamaronGetBoxConfig.body.maxTurbidez,
+        _sensores[3].minimo = configprovider.getcamaronGetBoxConfig.body.minOxdix,
+        _sensores[3].maximo = configprovider.getcamaronGetBoxConfig.body.maxOxdix,
+        _sensores[4].minimo = configprovider.getcamaronGetBoxConfig.body.minPh,
+        _sensores[4].maximo = configprovider.getcamaronGetBoxConfig.body.maxPh,
+        _sensores[5].minimo = configprovider.getcamaronGetBoxConfig.body.minLluvia,
+        _sensores[5].maximo = configprovider.getcamaronGetBoxConfig.body.maxLluvia,
+        _sensores[6].minimo = configprovider.getcamaronGetBoxConfig.body.minSal,
+        _sensores[6].maximo = configprovider.getcamaronGetBoxConfig.body.maxSal,
+        _sensores[7].minimo = configprovider.getcamaronGetBoxConfig.body.minNivel,
+        _sensores[7].maximo = configprovider.getcamaronGetBoxConfig.body.maxNivel,
+      });
 
       isLoading = false;
       notifyListeners();
@@ -91,23 +110,23 @@ class CamaronGetAllValoresProvider with ChangeNotifier {
     }
   }
 
-  List<List<String>> getRango(String row, String row2) {
-    List<List<String>> rows2 = [];
-    int index = rows.indexWhere((element) => element[0] == row);
-    int index2 = rows.indexWhere((element) => element[0] == row2);
-    if (index == -1 || index2 == -1) {
-      return rows2;
+  // fechainicio y fechafinal son strings de fechas en formato iso
+  // la variable rows es una lista de listas de strings en el que el element[0] es la fecha
+  // en string en formato iso, puedes crear la funcion getRango, que devuelva una lista de listas de strings
+  // que contenga los elementos de rows que esten entre fechainicio y fechafinal
+  List<List<String>> getRango(String fechainicio, String fechafinal) {
+    List<List<String>> resultado = [];
+
+    for (int i = 0; i < rows.length; i++) {
+      String fechaActual = rows[i][8];
+      if (fechaActual.compareTo(fechainicio) >= 0 && fechaActual.compareTo(fechafinal) <= 0) {
+        resultado.add(rows[i]);
+      }
     }
-    if (index > index2) {
-      int aux = index;
-      index = index2;
-      index2 = aux;
-    }
-    for (int i = index; i <= index2; i++) {
-      rows2.add(rows[i]);
-    }
-    return rows2;
+
+    return resultado;
   }
+
 
 }
 

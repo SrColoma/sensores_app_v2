@@ -48,15 +48,18 @@ class PdfProvider with ChangeNotifier {
 
 
     // final bytes = await pdf.save();
-    // final filePath = '../$titulo.pdf';
+    final filePath = '../$titulo.pdf';
     // final file = File(filePath);
     // print(file.path);
     // await file.writeAsBytes(bytes);
 
     final bytes = await pdf.save();
     final fileName = '$titulo.pdf';
-    final filePath = path.join(
-        Platform.environment['USERPROFILE']!, 'Downloads', fileName);
+
+    // final filePath = path.join(
+    //   Platform.environment['USERPROFILE']!, 'Downloads', fileName
+    // );
+
     final file = File(filePath);
     await file.writeAsBytes(bytes);
 

@@ -32,6 +32,30 @@ class CamaronGetBoxConfigProvider with ChangeNotifier  {
     )
   );
 
+  CamaronGetBoxConfig fakecamaronGetBoxConfig = CamaronGetBoxConfig(
+    status: 0,
+    body: Body(
+      frecuencia: 0.0,
+      maxLluvia: 0.0,
+      minNivel: 0.0,
+      minTemp: 0.0,
+      minTurbidez: 0.0,
+      minLluvia: 0.0,
+      maxTemp: 0.0,
+      maxNivel: 0.0,
+      maxOxdix: 0.0,
+      minOxdix: 0.0,
+      maxSal: 0.0,
+      minTds: 0.0,
+      piscina: '',
+      maxPh: 0.0,
+      maxTds: 0.0,
+      minPh: 0.0,
+      minSal: 0.0,
+      maxTurbidez: 0.0,
+    )
+  );
+
   set rows(List<List<String>> rows){
     _rows = rows;
     notifyListeners();
@@ -44,6 +68,8 @@ class CamaronGetBoxConfigProvider with ChangeNotifier  {
 
   List<List<String>> get rows => _rows;
   List<String> get columns => _columns;
+  CamaronGetBoxConfig get getcamaronGetBoxConfig => camaronGetBoxConfig;
+  CamaronGetBoxConfig get getfakecamaronGetBoxConfig => fakecamaronGetBoxConfig;
 
   CamaronGetBoxConfigProvider(){
     getCamaronGetBoxConfig();
@@ -86,6 +112,29 @@ class CamaronGetBoxConfigProvider with ChangeNotifier  {
     });
     return _rows;
     
+  }
+
+  List<List<String>> getFakerows(){
+    return [
+        ["Frecuencia","frecuencia",0.toString()],
+        ["Maximo de lluvia","max_LLUVIA",0.toString()],
+        ["Minimo de nivel","min_NIVEL",0.toString()],
+        ["Minimo de temperatura","min_TEMP",0.toString()],
+        ["Minimo de turbidez","min_TURBIDEZ",0.toString()],
+        ["Minimo de lluvia","min_LLUVIA",0.toString()],
+        ["Maximo de temperatura","max_TEMP",0.toString()],
+        ["Maximo de nivel","max_NIVEL",0.toString()],
+        ["Maximo de oxido disuelto","max_OXDIX",0.toString()],
+        ["Minimo de oxido disuelto","min_OXDIX",0.toString()],
+        ["Maximo de salinidad","max_SAL",0.toString()],
+        ["Minimo de tds","min_TDS",0.toString()],
+        ["Piscina","piscina",0.toString()],
+        ["Maximo de ph","max_PH",0.toString()],
+        ["Maximo de tds","max_TDS",0.toString()],
+        ["Minimo de ph","min_PH",0.toString()],
+        ["Minimo de salinidad","min_SAL",0.toString()],
+        ["Maximo de turbidez","max_TURBIDEZ",0.toString()],
+      ];
   }
 
   

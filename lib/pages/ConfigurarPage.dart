@@ -7,7 +7,9 @@ import 'package:sensores_app_v2/components/TopBarSliver.dart';
 import 'package:sensores_app_v2/models/camaronGetBoxConfig.dart';
 import 'package:sensores_app_v2/providers/CamaronGetAlertasProvider.dart';
 import 'package:sensores_app_v2/providers/CamaronGetBoxConfigProvider.dart';
+import 'package:sensores_app_v2/providers/CamaronGetPiscinasProvider.dart';
 import 'package:sensores_app_v2/providers/CamaronGetReportesProvider.dart';
+import 'package:sensores_app_v2/providers/SessionProvider.dart';
 import 'package:sensores_app_v2/widgets/dialogs/NuevoReporteDialog.dart';
 
 import '../providers/PageProvider.dart';
@@ -32,6 +34,8 @@ class _ConfigurarPageState extends State<ConfigurarPage> {
     // final camaronGetReportesProvider = Provider.of<CamaronGetReportesProvider>(context);
     // final camaronGetAlertasProvider = Provider.of<CamaronGetAlertasProvider>(context);
     final camaronGetBoxConfigProvider = Provider.of<CamaronGetBoxConfigProvider>(context);
+    final sessionProvider = Provider.of<SessionProvider>(context);
+    final camaronGetPiscinasProvider = Provider.of<CamaronGetPiscinasProvider>(context);
 
     pageProvider.routeName = ConfigurarPage.routeName;
     pageProvider.title = ConfigurarPage.title;
@@ -45,17 +49,44 @@ class _ConfigurarPageState extends State<ConfigurarPage> {
           slivers: [
             TopBarSliver(showActions: false),
 
-            camaronGetBoxConfigProvider.rows.isNotEmpty
-            ? TablaEditableSliver(
-                titulo: "Configuracion",
-                descripcion: "Configuracion actual",
-                columns: camaronGetBoxConfigProvider.columns,
-                rows: camaronGetBoxConfigProvider.rows,
+
+            if (camaronGetPiscinasProvider.piscinas.contains(sessionProvider.piscina))
+              if (camaronGetBoxConfigProvider.rows.isNotEmpty)
+                if(sessionProvider.piscina == sessionProvider.fakePiscina)
+                  TablaEditableSliver(
+                    titulo: "Configuracion",
+                    descripcion: "Configuracion actual",
+                    columns: camaronGetBoxConfigProvider.columns,
+                    rows: camaronGetBoxConfigProvider.rows,
+                    // rows: (sessionProvider.piscina == sessionProvider.fakePiscina)
+                    //       ? camaronGetBoxConfigProvider.rows
+                    //       : camaronGetBoxConfigProvider.getFakerows(),
+                  )
+                else(
+                  TablaSliver(
+                    titulo: "Configuracion",
+                    descripcion: "Configuracion actual",
+                    columns: camaronGetBoxConfigProvider.columns,
+                    rows: camaronGetBoxConfigProvider.getFakerows(),
+                    // rows: (sessionProvider.piscina == sessionProvider.fakePiscina)
+                    //       ? camaronGetBoxConfigProvider.rows
+                    //       : camaronGetBoxConfigProvider.getFakerows(),
+                  )
+                )
+              else(
+                const SliverToBoxAdapter(
+                  child: Center(child: CircularProgressIndicator()),
+                )
               )
-            : const SliverToBoxAdapter(
-                child: Center(child: CircularProgressIndicator()),
+            else
+              SliverToBoxAdapter(
+                child: Container(
+                  height: 50,
+                  child: const Center(
+                    child: Text('Selecciona una piscina para ver sus configuraciones'),
+                  ),
+                ),
               ),
-            
             
 
           ],
