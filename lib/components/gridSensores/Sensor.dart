@@ -51,7 +51,7 @@ class Sensor extends StatelessWidget {
           ],
         ),
         // GraficoLineaPorFecha(
-        //   data: puntos
+        //   data: puntos b
         // ),
         GraficoLineaPorFecha(
           data: puntos,
